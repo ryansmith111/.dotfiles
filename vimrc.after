@@ -1,0 +1,88 @@
+" JTemplates file type
+au BufNewFile,BufRead *.jt set filetype=html
+
+" Define jquery syntax so jquery.vim plugin works
+au BufRead,BufNewFile *.js set ft=javascript syntax=jquery
+
+set textwidth=0 " this prevents text and comments from auto wrapping
+set formatoptions=croql
+
+" sets line numbering to be relative to the current line
+" set relativenumber "for some reason this didn't work, had to set in .vimrc
+
+" set indenting options
+set smartindent
+set autoindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+" select all
+map <c-a> ggVG
+
+map <F3> :noh<CR> " turns of highlights from last search
+map <F5> :e %<CR> " reload current file
+map <F6> :set invert<CR> "toggle showing non-printables
+
+" Move rows
+map <C-M-down> ddp
+map <C-M-up> dd<up>P
+
+" TAB PAGES
+" gt | fn+Ctrl+DOWN  = next tab
+" gT | fn+Ctrl+UP = previous tab
+" {i}gt = go to tab in position i
+set guitablabel=%N\ %t
+
+" Ack
+map <Leader>a :Ack<space>
+
+" FOLDING
+set foldmethod=syntax
+set foldlevel=100 " don't fold anything initially
+syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
+"-------INDENT - worked ok
+"set foldmethod=indent
+"set foldlevel=2
+"--------MARKERS - only useful if you close manually
+"set foldmarker={,} " only use with a high foldlevel
+"set foldmethod=marker
+"set foldlevel=100
+
+"NERDTree
+let g:NERDTreeChDirMode=1 " changes vim cwd with :NERDTree [path]. this scopes fuzzy finder and ack correctly 
+
+
+" VUNDLE
+" set rtp+=~/.vim/bundle/vundle/
+" call vundle#rc()
+" let Vundle manage Vundle - required! 
+" Bundle 'gmarik/vundle'
+
+" Bundle 'jQuery'
+
+"Sparkup - zencoding
+" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+let g:sparkupExecuteMapping='<c-e>'
+
+" Bundle 'Lokaltog/vim-easymotion'
+" use <leader>w to activate
+
+" Bundle 'Headlights'
+" Bundle 'L9'
+
+" FUZZYFINDER
+" Bundle 'FuzzyFinder'
+nmap <leader>ff :FufFile **/<CR>
+nmap <leader>fb :FufBuffer<CR>
+
+" SESSION
+" Bundle 'session.vim--Odding'
+" let g:session_autoload = 'yes'
+" let g:session_default_to_last = 'true'
+" map <leader>os :OpenSession
+" map <leader>ss :SaveSession<CR>
+" map <leader>cs :CloseSession<CR>
+
+" filetype plugin indent on     " required! 
+
