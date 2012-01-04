@@ -1,3 +1,18 @@
+[color]
+    diff = auto
+    branch = auto
+    status = auto
+    ui = auto
+[alias]
+    fix = commit --amend -C HEAD
+    st = status
+    ci = commit -am
+    br = branch
+    co = checkout
 [user]
 	name = Ryan Smith
 	email = rsmith@bandwidth.com
+[core]
+	editor = mvim -f
+[core "merge"]
+	tool = opendiff
