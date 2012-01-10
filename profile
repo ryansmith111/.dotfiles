@@ -3,6 +3,9 @@
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 
+# add home bin dir for my own scripts
+export PATH=~/bin:$PATH
+
 # adds the current git branch to the command prompt in green surrounded by brackets
 function parse_git_branch_and_add_brackets {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ \[\1\]/'
