@@ -14,5 +14,14 @@
 	email = rsmith@bandwidth.com
 [core]
 	editor = mvim -f
+	excludesfile = /Users/ryan/.gitignore_global
 [core "merge"]
 	tool = opendiff
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[push]
+	default = tracking
