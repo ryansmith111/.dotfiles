@@ -84,5 +84,10 @@ nmap <leader>fb :FufBuffer<CR>
 " map <leader>ss :SaveSession<CR>
 " map <leader>cs :CloseSession<CR>
 
-" filetype plugin indent on     " required! 
+" filetype plugin indent on     " required!"
+
+let g:syntastic_mode_map = { 'mode': 'active', 
+     \ 'active_filetypes': [], 
+    \ 'passive_filetypes': ['html','javascript'] } 
+
 
