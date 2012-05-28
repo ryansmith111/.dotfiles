@@ -11,6 +11,9 @@ export NODE_PATH='/usr/local/lib/node_modules'
 # add npm module bin dir to path
 export PATH=$PATH:/usr/local/share/npm/bin
 
+# add brew nginx dir to path
+export PATH=$PATH:/usr/local/sbin
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # adds the current git branch to the command prompt in green surrounded by brackets
@@ -29,4 +32,4 @@ source ~/.dotfiles/git-flow-completion.bash
 
 # ALIASES
 alias ls='ls -laFG'
-
+alias rt='cd ~/Development/webapp-core'
