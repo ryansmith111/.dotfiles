@@ -4,24 +4,43 @@
     status = auto
     ui = auto
 [alias]
-    fix = commit --amend -C HEAD
+    fix = commit --amend -C HEAD # commit current index to replace the last commit, reuse orig commit message and timestamp
     st = status
     ci = commit -am
     br = branch
     co = checkout
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lc = log ORIG_HEAD.. --stat --no-merges # list all new commits after fetched.
+    changes = diff --name-status -r # show files that are changes
+    diffstat = diff --stat -r # show stats (changes, insertions, deletions) of each file
 [user]
 	name = Ryan Smith
 	email = rsmith@bandwidth.com
+
 [core]
-	editor = mvim -f
+    editor = mvim -f
 	excludesfile = /Users/ryan/.gitignore_global
 [core "merge"]
-	tool = opendiff
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    tool = opendiff
+
+[diff]
+    mnemonicprefix = true # instead of a/ and b/, use i(index), w(work tree), c(commit), o(object)
+    tool = deltawalker
+
+[difftool]
+    prompt = false # remove the annoying prompt before an external diff tool is launched
+
+[difftool "deltawalker"]
+    # I had to change the target script, as it was intended only as diff.external, not as a cmd.
+    # so it expected 7 params. May need to update the script again after updates to DeltaWalker
+    cmd = /Applications/DeltaWalker.app/Contents/MacOS/git-diff \"$LOCAL\" \"$REMOTE\"
+
+[merge]
+    tool = deltawalker
+
+[mergetool  "deltawalker"]
+cmd = '/Applications/DeltaWalker.app/Contents/MacOS/bzr-git-merge' "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+
 [push]
-	default = tracking
+    default = tracking
+
