@@ -37,6 +37,10 @@ set guitablabel=%N\ %t
 " Ack
 map <Leader>a :Ack<space>
 
+" POWERLINE
+let g:Powerline_symbols = 'fancy'
+
+
 " FOLDING
 set foldmethod=syntax
 set foldlevel=100 " don't fold anything initially
@@ -52,14 +56,6 @@ syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
 "NERDTree
 let g:NERDTreeChDirMode=1 " changes vim cwd with :NERDTree [path]. this scopes fuzzy finder and ack correctly 
 
-
-" VUNDLE
-" set rtp+=~/.vim/bundle/vundle/
-" call vundle#rc()
-" let Vundle manage Vundle - required! 
-" Bundle 'gmarik/vundle'
-
-" Bundle 'jQuery'
 
 "Sparkup - zencoding
 " Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -86,6 +82,7 @@ nmap <leader>fb :FufBuffer<CR>
 
 " filetype plugin indent on     " required!"
 
+" syntastic was causing temporary ui freezes, so set to passive
 let g:syntastic_mode_map = { 'mode': 'active', 
      \ 'active_filetypes': [], 
     \ 'passive_filetypes': ['html','javascript'] } 

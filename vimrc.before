@@ -1,1 +1,13 @@
 let mapleader = ","
+" unneeded janus languages
+call janus#disable_plugin('coffeescript')
+call janus#disable_plugin('cucumber')
+call janus#disable_plugin('haml')
+call janus#disable_plugin('rspec')
+call janus#disable_plugin('scala')
+" unneeded janus tools
+call janus#disable_plugin('endwise')
+call janus#disable_plugin('hammer')
+call janus#disable_plugin('supertab')
+call janus#disable_plugin('vroom')
+call janus#disable_plugin('javascript')

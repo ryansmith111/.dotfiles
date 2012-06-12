@@ -33,3 +33,17 @@ source ~/.dotfiles/git-flow-completion.bash
 # ALIASES
 alias ls='ls -laFG'
 alias rt='cd ~/Development/webapp-core'
+alias g='git'
+# Dir navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ~='cd ~'
+alias ll='tree --dirsfirst -ChFupDaLg'
+#alias delta='/Applications/DeltaWalker.app/Contents/MacOS/Deltawalker -mi $0 $1'
+# these aliases are needed because sucky rvm environment. see https://github.com/carlhuda/janus/wiki/Rvm
+# for a more detailed explanation
+alias vim='rvm system do /Applications/MacVim.app/Contents/MacOS/Vim $@'
+alias mvim='rvm system do /Applications/MacVim.app/Contents/MacOS/MacVim $@'
+
+set -o vi

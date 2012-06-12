@@ -1,8 +1,10 @@
 
 set background=light
-colorscheme solarized
-g:solarized_contrast="high"
+let g:solarized_contrast="high"
+"colorscheme solarized
+colorscheme getafe
 "color sienna
+set guifont=Menlo\ for\ Powerline
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
