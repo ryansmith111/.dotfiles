@@ -61,6 +61,11 @@ alias nxr='rt;clear;nxreload;nxklog;nxtlog'
 alias nxn='rt;clear;nxq;nxklog;nx;nxtlog'
 alias nxps='ps -aef | grep nginx'
 
+#git aliases
+# brsync - list branches which are out of sync with their remote
+alias brsync='git branch -a -v | sed -n -E -e "/(ahead|behind)/p"'
+
+# SASS watch files
 alias swatch='rt;sass -l -t expanded --watch  assets/sass/app.scss:build/css/app.css'
 
 #'alias delta='/Applications/DeltaWalker.app/Contents/MacOS/Deltawalker -mi $0 $1'

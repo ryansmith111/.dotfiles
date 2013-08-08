@@ -13,7 +13,8 @@
     # list local and remote branches, their upstream and status, and head commit
     br = branch -a -vv
     # list branches which are out of sync with their remote
-    brsync = branch -a -v | sed -n -E -e "/(ahead|behind)/p"
+    # brsync is a bash alias, since it pipes output to sed. listed here so its not forgotten
+    #brsync = 'branch -a -v | sed -n -E -e "/(ahead|behind)/p"'
     co = checkout
     # custom formatted log
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
