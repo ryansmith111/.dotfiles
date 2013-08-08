@@ -5,27 +5,48 @@
     ui = auto
 
 [alias]
-    fix = commit --amend -C HEAD # commit current index to replace the last commit, reuse orig commit message and timestamp
+    # commit current index to replace the last commit, reuse orig commit message and timestamp
+    fix = commit --amend -C HEAD
     st = status
+    # all in one add modified and commit with specified message
     ci = commit -am
-    br = branch
+    # list local and remote branches, their upstream and status, and head commit
+    br = branch -a -vv
+    # list branches which are out of sync with their remote
+    brsync = branch -a -v | sed -n -E -e "/(ahead|behind)/p"
     co = checkout
+    # custom formatted log
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    lc = log ORIG_HEAD.. --stat --no-merges # list all new commits after fetched.
-    changes = diff --name-status -r # show files that are changes
-    diffstat = diff --stat -r # show stats (changes, insertions, deletions) of each file
+    # list all new commits after fetched
+    lc = log ORIG_HEAD.. --stat --no-merges
+    dt = difftool -d
+    # rebase local changes onto those pulled from remote to keep history together
+    pull = pull --rebase
+    # show files that are changes
+    changes = diff --name-status -r
+    # show stats (changes, insertions, deletions) of each file
+    diffstat = diff --stat -r
+    # instead of old/new line, shows single line with old/new words colored
+    wdiff = diff --color-words
+    # pulls latest develop and rebases current branch on it
+    sync = "!f() { echo Syncing this branch with develop && git checkout develop && git pull && git checkout '-' && git rebase develop; }; f"
+    # lists tags and their comments in order
+    tags = log --tags --simplify-by-decoration --pretty=format:'%Cgreen %d %Creset %Cblue %cr %Creset %s'
+    # view diff of the HEAD commit
+	difflast = diff HEAD~1 HEAD
 
 [user]
-    name = Ryan Smith
-    email = rsmith@bandwidth.com
+	name = Ryan Smith
+	email = rsmith@bandwidth.com
 
 [core]
     editor = mvim -f
-    excludesfile = /Users/ryan/.gitignore_global
+	excludesfile = /Users/ryan/.gitignore_global
 [core "merge"]
     tool = opendiff
 
 [diff]
+#external = "/Applications/DeltaWalker.app/Contents/MacOS/git-diff"
     mnemonicprefix = true # instead of a/ and b/, use i(index), w(work tree), c(commit), o(object)
     tool = deltawalker
 
@@ -33,21 +54,22 @@
     prompt = false # remove the annoying prompt before an external diff tool is launched
 
 [difftool "deltawalker"]
-    # I had to change the target script, as it was intended only as diff.external, not as a cmd.
+    # I had to change the target command, as it was intended only as diff.external, not as a cmd.
     # so it expected 7 params. May need to update the script again after updates to DeltaWalker
-    cmd = /Applications/DeltaWalker.app/Contents/MacOS/git-diff \"$LOCAL\" \"$REMOTE\"
+    # added | cat so it returns properly after exiting Deltawalker
+    cmd = '/Applications/DeltaWalker.app/Contents/MacOS/git-diff' "1" "$LOCAL" "3" "4" "$REMOTE" | cat
 
 [merge]
-    tool = deltawalker
+tool = deltawalker
 
 [mergetool  "deltawalker"]
-    cmd = '/Applications/DeltaWalker.app/Contents/MacOS/bzr-git-merge' "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+cmd = '/Applications/DeltaWalker.app/Contents/MacOS/git-merge' "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 
 [push]
     default = tracking
 
 [difftool "sourcetree"]
-	cmd = " "
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = " "

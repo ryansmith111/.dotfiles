@@ -1,3 +1,6 @@
+" stop vim from beeping
+set visualbell
+
 " JTemplates file type
 au BufNewFile,BufRead *.jt set filetype=html
 
@@ -17,29 +20,38 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
+inoremap jj <Esc> " makes it way easier to exit input mode
+" fixes autoclose problems with mustache-style templates
+inoremap {{ {{}}<Esc>hi
 " select all
 map <c-a> ggVG
 
 map <F3> :noh<CR> " turns of highlights from last search
 map <F5> :e %<CR> " reload current file
-map <F6> :set invert<CR> "toggle showing non-printables
+map <F6> :set invlist<CR> "toggle showing non-printables
 
 " Move rows
 map <C-M-down> ddp
 map <C-M-up> dd<up>P
 
 " TAB PAGES
-" gt | fn+Ctrl+DOWN  = next tab
-" gT | fn+Ctrl+UP = previous tab
+"gt | fn+Ctrl+DOWN  = next tab
+"gT | fn+Ctrl+UP = previous tab
 " {i}gt = go to tab in position i
 set guitablabel=%N\ %t
 
 " Ack
 map <Leader>a :Ack<space>
+" map <Leader>a :Ack --ignore-dir=dist --ignore-dir=build --ignore-dir=node_modules --ignore-dir=assets/js<space>
 
 " POWERLINE
 let g:Powerline_symbols = 'fancy'
 
+set colorcolumn=100
+" highlights background in subtle red for text beyond colomn 80
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%>100v.\+/
+" /\%81v.\+/
 
 " FOLDING
 set foldmethod=syntax
@@ -72,10 +84,16 @@ let g:sparkupExecuteMapping='<c-e>'
 nmap <leader>ff :FufFile **/<CR>
 nmap <leader>fb :FufBuffer<CR>
 
+"CtrlP"
+let g:ctrlp_switch_buffer = 0 " disabled. was 2: don't switch to existing buffer unless on same tab
+let g:ctrlp_custom_ignore = {'dir': 'node_modules$\|dist$\|build$'}
+let g:ctrlp_arg_map = 1 " <c-o> or <c-y> accept key arg for where to open: thvr
+let g:ctrlp_open_multiple_files = '4vr' " use <c-z> to select and <c-o> to open mult in v-splits
+
 " SESSION
 " Bundle 'session.vim--Odding'
-" let g:session_autoload = 'yes'
-" let g:session_default_to_last = 'true'
+let g:session_autoload = 'yes'
+let g:session_default_to_last = 'true'
 " map <leader>os :OpenSession
 " map <leader>ss :SaveSession<CR>
 " map <leader>cs :CloseSession<CR>
@@ -86,5 +104,13 @@ nmap <leader>fb :FufBuffer<CR>
 let g:syntastic_mode_map = { 'mode': 'active', 
      \ 'active_filetypes': [], 
     \ 'passive_filetypes': ['html','javascript'] } 
+" open current file in Marked app, which renders markdown preview
+:nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
 
+
+" Source the vimrc file after saving it
+if has("autocmd") && !exists("autocommands_loaded")
+  autocmd bufwritepost .vimrc.after source $MYVIMRC
+  let autocommands_loaded = 1
+endif
 
