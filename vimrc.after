@@ -7,6 +7,8 @@ au BufNewFile,BufRead *.jt set filetype=html
 " Define jquery syntax so jquery.vim plugin works
 au BufRead,BufNewFile *.js set ft=javascript syntax=jquery
 
+" Define nginx conf file type
+au BufRead,BufNewFile nginx*.conf set ft=nginx
 set textwidth=0 " this prevents text and comments from auto wrapping
 set formatoptions=croql
 
